@@ -29,7 +29,16 @@ class Users
 
     public function get_users()
     {
-        return $this->db->query('SELECT users.id AS id ,users.first_name AS first_name, users.last_name AS last_name,positions.position AS position FROM `users` INNER JOIN `positions` ON users.position_id = positions.id LIMIT 1000;')->fetchAll(PDO::FETCH_CLASS, 'User');
+        return $this->db->query('
+        SELECT 
+            users.id AS id ,
+            users.first_name AS first_name,
+            users.last_name AS last_name,
+            positions.position AS position
+        FROM `users` INNER JOIN `positions` 
+        ON users.position_id = positions.id 
+        LIMIT 1000;
+        ')->fetchAll(PDO::FETCH_CLASS, 'User');
     }
     public function get_user($id)
     {
