@@ -86,7 +86,16 @@
           To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
       -->
                 <div class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
-                    <form class="w-full max-w-lg mx-auto" action="" id="user_form">
+                    <div class="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
+                        <button type="button" class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            <span class="sr-only">Close</span>
+                            <!-- Heroicon name: outline/x-mark -->
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <form class="w-full max-w-lg mx-auto pt-5" action="" id="user_form">
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
@@ -108,7 +117,7 @@
                                     Должность
                                 </label>
                                 <div class="relative">
-                                    <select name="position" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                    <select name="position" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 bg-none py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                                         <option value="Программист">Программист</option>
                                         <option value="Менеджер">Менеджер</option>
                                         <option value="Тестировщик">Тестировщик</option>
@@ -120,6 +129,9 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                                <button type="button" class="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Отправить</button>
                         </div>
                     </form>
                 </div>
