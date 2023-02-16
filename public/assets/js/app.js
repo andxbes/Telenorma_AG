@@ -5,12 +5,12 @@ import intersect from '@alpinejs/intersect';
 Alpine.plugin(intersect); //lazy-loading, infinity loading
 
 /** alpine-components **/
-// import app from "./components/alpine/app";
+import users_table from "./components/users_table";
 
 
 if (typeof window !== 'undefined') {
     window.addEventListener('DOMContentLoaded', () => {
-        const _load = Promise.resolve( Alpine.start());
+        const _load = Promise.resolve(Alpine.start());
         _load.then(() => {
             console.info('started alpine');
         });
@@ -18,7 +18,7 @@ if (typeof window !== 'undefined') {
 
     document.addEventListener('alpine:init', () => {
         window.Alpine = Alpine;
-        // window.app = app;
-       
+        window.users_table = users_table;
+
     });
 }

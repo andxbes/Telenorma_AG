@@ -3060,6 +3060,7 @@ var module_default = src_default;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 /* harmony import */ var _alpinejs_intersect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @alpinejs/intersect */ "./node_modules/@alpinejs/intersect/dist/module.esm.js");
+/* harmony import */ var _components_users_table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/users_table */ "./assets/js/components/users_table.js");
 // you can import modules from the theme lib or even from
 // NPM packages if they support it…
 
@@ -3067,7 +3068,6 @@ __webpack_require__.r(__webpack_exports__);
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].plugin(_alpinejs_intersect__WEBPACK_IMPORTED_MODULE_1__["default"]); //lazy-loading, infinity loading
 
 /** alpine-components **/
-// import app from "./components/alpine/app";
 
 if (typeof window !== 'undefined') {
   window.addEventListener('DOMContentLoaded', function () {
@@ -3078,9 +3078,44 @@ if (typeof window !== 'undefined') {
   });
   document.addEventListener('alpine:init', function () {
     window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
-    // window.app = app;
+    window.users_table = _components_users_table__WEBPACK_IMPORTED_MODULE_2__["default"];
   });
 }
+
+/***/ }),
+
+/***/ "./assets/js/components/users_table.js":
+/*!*********************************************!*\
+  !*** ./assets/js/components/users_table.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function users_table(el) {
+  return {
+    element: el,
+    users: null,
+    init: function init() {
+      this.refresh_users_data();
+    },
+    refresh_users_data: function refresh_users_data() {
+      var _this = this;
+      fetch('/users.php').then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        console.info(data);
+        // if ((typeof data) !== "undefined") {
+        _this.users = data;
+        // }
+      });
+    }
+  };
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (users_table);
 
 /***/ }),
 
