@@ -23,7 +23,7 @@
                     </div>
                     <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                         <button type="button"
-                            class="block rounded-md bg-indigo-600 py-1.5 px-3 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            class="block rounded-md bg-blue-600 py-1.5 px-3 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
                             Добавить</button>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                                                 <td
                                                     class="relative whitespace-nowrap py-4 pl-3 pr-6 text-right text-sm font-medium sm:pr-0">
                                                     <a href="#"
-                                                        class="text-indigo-600 hover:text-indigo-900">Редактировать<span
+                                                        class="text-blue-600 hover:text-blue-900">Редактировать<span
                                                             class="sr-only">, Lindsay Walton</span></a>
                                                 </td>
                                             </tr>
@@ -111,7 +111,7 @@
                     class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                     <div class="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
                         <button type="button"
-                            class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                             <span class="sr-only">Close</span>
                             <!-- Heroicon name: outline/x-mark -->
                             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

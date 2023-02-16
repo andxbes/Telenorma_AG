@@ -37,6 +37,9 @@ function buildJs(dir, dest) {
 mix.setPublicPath('./build');
 
 mix.webpackConfig({
+    stats: {
+        children: true,
+    },
     externals: {
         // 'alpinejs': "Alpine",
         //"jquery": "jQuery",
