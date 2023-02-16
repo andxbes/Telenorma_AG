@@ -1,0 +1,92 @@
+version: '3.9'
+
+networks:
+  darina:
+    driver: bridge
+
+services:
+  mariadb:
+    image:  docker.io/bitnami/mariadb:10.6
+    container_name: mariadb
+    restart: unless-stopped
+    networks:
+      - darina
+    environment:
+      - MARIADB_ROOT_PASSWORD=%root%pass%word%
+      - MARIADB_USER=beta
+      - MARIADB_DATABASE=beta
+      - MARIADB_PASSWORD=beta
+    ports:
+      - "3306:3306"
+    volumes:
+      - 'mariadb_data:/bitnami/mariadb'
+      - './bd:/docker-entrypoint-initdb.d'
+  phpmyadmin:
+    image: bitnami/phpmyadmin:latest
+    container_name: phpMyAdmin
+    restart: always
+    networks:
+      - darina
+    environment:
+      - DATABASE_HOST=mariadb
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=%root%pass%word%
+      - DATABASE_ALLOW_NO_PASSWORD=false
+      - PHPMYADMIN_ALLOW_ARBITRARY_SERVER=yes
+      - PHPMYADMIN_PASSWORD=beta
+    ports:
+      - "88:8080"
+      # - "8443:8443"
+
+  phpfpm:
+    image: 'bitnami/php-fpm:latest'
+    networks:
+      - darina
+    volumes:
+      - ./public:/app
+
+  nginx:
+    image: 'bitnami/nginx:latest'
+    depends_on:
+      - phpfpm
+    networks:
+      - darina
+    ports:
+      - '80:80'
+      # - '443:443'
+    volumes:
+      - ./nginx/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/yourapp.conf
+    volumes_from:
+      - phpfpm
+
+  cache:
+    image: redis
+    container_name: redis
+    restart: unless-stopped
+#    ports:
+#      - '6379:6379'
+#    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - redis_cache:/data
+    networks:
+      - darina
+  
+
+volumes:
+  mariadb_data:
+    driver: local
+  sessions:
+    driver: local
+  php-data:
+    driver: local
+  opcache-data:
+    driver: local
+  redis_cache:
+    driver: local
+  ps_cache:
+    driver: local
+
+  
+
+    
