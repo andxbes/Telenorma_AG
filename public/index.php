@@ -118,9 +118,10 @@
                                 </label>
                                 <div class="relative">
                                     <select name="position" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 bg-none py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                        <option value="Программист">Программист</option>
-                                        <option value="Менеджер">Менеджер</option>
-                                        <option value="Тестировщик">Тестировщик</option>
+                                        <!-- TODO по хорошему бы вывести из базы -->
+                                        <option value="1">Программист</option>
+                                        <option value="2">Менеджер</option>
+                                        <option value="3">Тестировщик</option>
                                     </select>
                                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
