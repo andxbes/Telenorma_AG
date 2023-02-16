@@ -1,7 +1,7 @@
 version: '3.9'
 
 networks:
-  darina:
+  telenorma_ag:
     driver: bridge
 
 services:
@@ -10,7 +10,7 @@ services:
     container_name: mariadb
     restart: unless-stopped
     networks:
-      - darina
+      - telenorma_ag
     environment:
       - MARIADB_ROOT_PASSWORD=%root%pass%word%
       - MARIADB_USER=beta
@@ -26,7 +26,7 @@ services:
     container_name: phpMyAdmin
     restart: always
     networks:
-      - darina
+      - telenorma_ag
     environment:
       - DATABASE_HOST=mariadb
       - DATABASE_USER=root
@@ -41,7 +41,7 @@ services:
   phpfpm:
     image: 'bitnami/php-fpm:latest'
     networks:
-      - darina
+      - telenorma_ag
     volumes:
       - ./public:/app
 
@@ -50,7 +50,7 @@ services:
     depends_on:
       - phpfpm
     networks:
-      - darina
+      - telenorma_ag
     ports:
       - '80:80'
       # - '443:443'
@@ -70,7 +70,7 @@ services:
     volumes:
       - redis_cache:/data
     networks:
-      - darina
+      - telenorma_ag
   
 
 volumes:

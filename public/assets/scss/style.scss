@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak]{
+  @apply hidden #{!important};
+}
+
+h1 {
+  @apply font-bold text-5xl mb-6;
+}
+
+h2 {
+  @apply font-bold text-2xl mb-2;
+}
+h3{
+  @apply font-bold mb-2.5;
+}
+
+a{
+  @apply underline;
+}
+p{
+  @apply text-sm mb-5 text-[#595959] dark:text-gray-200;
+}
+
+
+html,body{
+  @apply max-w-full overflow-x-clip;
+}
