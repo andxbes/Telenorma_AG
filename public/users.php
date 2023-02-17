@@ -56,10 +56,14 @@ class Users
         $last_name = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $position = filter_input(INPUT_POST, 'position', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        // UPDATE `users` SET `first_name` = 'addыы', `last_name` = 'asdasыы', `position_id` = (SELECT id FROM positions where positions.position = 'Менеджер' LIMIT 1) WHERE `users`.`id` = 12; 
-
-        $sql = "UPDATE `users` SET first_name = :first_name, last_name = :last_name, position_id = (SELECT id FROM positions where positions.position = :position LIMIT 1) WHERE `users`.`id` = :user_id;";
-        // $sql = "INSERT INTO `users` (`ID`, `first_name`, `last_name`, `position_id`) VALUES (NULL, :first_name, :last_name, (SELECT id FROM positions where positions.position = :position LIMIT 1));";
+        $sql = "UPDATE `users` 
+                SET first_name = :first_name, last_name = :last_name, position_id = (
+                    SELECT id 
+                    FROM positions 
+                    WHERE positions.position = :position 
+                    LIMIT 1
+                    ) 
+                WHERE `users`.`id` = :user_id;";
 
         $this->db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY])->execute([
             ':user_id' => $user_id,
@@ -77,7 +81,13 @@ class Users
         $position = filter_input(INPUT_POST, 'position', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 
-        $sql = "INSERT INTO `users` (`ID`, `first_name`, `last_name`, `position_id`) VALUES (NULL, :first_name, :last_name, (SELECT id FROM positions where positions.position = :position LIMIT 1));";
+        $sql = "INSERT INTO `users` (`ID`, `first_name`, `last_name`, `position_id`) 
+                VALUES (NULL, :first_name, :last_name, (
+                    SELECT id 
+                    FROM positions 
+                    WHERE positions.position = :position 
+                    LIMIT 1
+                ));";
         $sth = $this->db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
         $sth->execute([
             ':first_name' => $first_name,
@@ -90,8 +100,6 @@ class Users
 
     public function delete_user($id)
     {
-        // DELETE FROM users WHERE `users`.`id` = 14"
-        error_log(print_r($id, true));
         $sql = "DELETE FROM users WHERE `users`.`id` = ? ;";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
