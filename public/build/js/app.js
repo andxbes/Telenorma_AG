@@ -3106,17 +3106,6 @@ function user_form(el) {
     position: "",
     init: function init() {
       var that = this;
-      // this.element.addEventListener("submit", function (e) {
-      //     e.preventDefault();
-      //     var data = new FormData(el);
-      //     fetch('/users.php', {
-      //         method: that.method,
-      //         cache: 'no-cache',
-      //         headers: {
-      //         },
-      //         body: data
-      //     }).then(() => { console.info('sended') });
-      // });
     },
     set_user_data: function set_user_data(user, method) {
       if (user) {
@@ -3134,7 +3123,6 @@ function user_form(el) {
     },
     send_data: function send_data(el) {
       var data = new FormData(el);
-      console.info('send data', data);
       return fetch('/users.php', {
         method: 'POST',
         cache: 'no-cache',
@@ -3174,27 +3162,20 @@ function users_table(el) {
       fetch('/users.php').then(function (res) {
         return res.json();
       }).then(function (data) {
-        //console.info(data);
-        // if ((typeof data) !== "undefined") {
         _this.users = data;
-        // }
       });
     },
     add_new_user: function add_new_user() {
       this.form_params.user = null;
       this.form_params.show = true;
-      console.info('add_new_user');
     },
     edit_user: function edit_user(user_id) {
-      console.info('edit user', user_id);
       this.form_params.user = this.users.find(function (user) {
         return user.id === user_id;
       });
       this.form_params.show = true;
-      // this.form_params.user = $id;
     },
     delete_user: function delete_user(user_id) {
-      console.info('delete user 1', user_id);
       return fetch('/users.php?user_id=' + user_id, {
         method: 'DELETE',
         cache: 'no-cache',

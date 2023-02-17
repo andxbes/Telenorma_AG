@@ -7,17 +7,6 @@ function user_form(el) {
         position: "",
         init() {
             let that = this;
-            // this.element.addEventListener("submit", function (e) {
-            //     e.preventDefault();
-            //     var data = new FormData(el);
-            //     fetch('/users.php', {
-            //         method: that.method,
-            //         cache: 'no-cache',
-            //         headers: {
-            //         },
-            //         body: data
-            //     }).then(() => { console.info('sended') });
-            // });
         },
         set_user_data(user, method) {
             if (user) {
@@ -37,7 +26,6 @@ function user_form(el) {
         },
         send_data(el) {
             var data = new FormData(el);
-            console.info('send data', data);
             return fetch('/users.php', {
                 method: 'POST',
                 cache: 'no-cache',
