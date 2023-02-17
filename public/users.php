@@ -7,8 +7,10 @@
 header('Content-Type: application/json; charset=utf-8');
 $users = new Users();
 switch ($_SERVER['REQUEST_METHOD']) {
-    case 'DELETE':
+    case 'DELETE': // Этот метод пыха тоже не поддерживает
         break;
+    // case 'PUT': // Как оказалось пыха не поддерживает данный метод, тут в большей степени можно обработать но дописывать самому обработку данных 
+    //     break; 
     case 'POST':
         if (!empty($user_id = filter_input(INPUT_POST, 'user_id', FILTER_SANITIZE_NUMBER_INT))) {
             $users->update_user($user_id);
