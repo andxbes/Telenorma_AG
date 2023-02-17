@@ -3100,17 +3100,23 @@ __webpack_require__.r(__webpack_exports__);
 function user_form(el) {
   return {
     element: el,
-    method: "",
     user_id: 0,
     first_name: "",
     last_name: "",
     position: "",
     init: function init() {
-      this.element.addEventListener("submit", function (e) {
-        e.preventDefault();
-        var data = new FormData(form);
-        console.info(data);
-      });
+      var that = this;
+      // this.element.addEventListener("submit", function (e) {
+      //     e.preventDefault();
+      //     var data = new FormData(el);
+      //     fetch('/users.php', {
+      //         method: that.method,
+      //         cache: 'no-cache',
+      //         headers: {
+      //         },
+      //         body: data
+      //     }).then(() => { console.info('sended') });
+      // });
     },
     set_user_data: function set_user_data(user, method) {
       if (user) {
@@ -3124,8 +3130,17 @@ function user_form(el) {
         this.last_name = '';
         this.position = '';
       }
-      this.method = method;
       console.info("setuserdata", user, method);
+    },
+    send_data: function send_data(el) {
+      var data = new FormData(el);
+      console.info('send data', data);
+      return fetch('/users.php', {
+        method: 'POST',
+        cache: 'no-cache',
+        headers: {},
+        body: data
+      });
     }
   };
 }
@@ -3149,7 +3164,6 @@ function users_table(el) {
     users: null,
     form_params: {
       show: false,
-      method: '',
       user: null
     },
     init: function init() {
@@ -3167,14 +3181,12 @@ function users_table(el) {
       });
     },
     add_new_user: function add_new_user() {
-      this.form_params.method = "POST";
       this.form_params.user = null;
       this.form_params.show = true;
       console.info('add_new_user');
     },
     edit_user: function edit_user(user_id) {
       console.info('edit user', user_id);
-      this.form_params.method = "PUT";
       this.form_params.user = this.users.find(function (user) {
         return user.id === user_id;
       });
@@ -3182,7 +3194,7 @@ function users_table(el) {
       // this.form_params.user = $id;
     },
     delete_user: function delete_user(user_id) {
-      console.info('delete user', user_id);
+      console.info('delete user 1', user_id);
     }
   };
 }

@@ -140,7 +140,9 @@
                                 </svg>
                             </button>
                         </div>
-                        <form x-data="user_form($el)" class="w-full max-w-lg mx-auto pt-5" action="" id="user_form">
+                        <form x-data="user_form($el)"
+                            @submit.prevent="send_data($el).then(()=>{form_params.show = false; refresh_users_data()})"
+                            class="w-full max-w-lg mx-auto pt-5" action="" id="user_form">
                             <div x-init="$watch('form_params.show', (value) => {set_user_data(form_params.user,form_params.method)} )"
                                 class="flex flex-wrap -mx-3 mb-6">
                                 <input type="hidden" name="user_id" x-model="user_id">
@@ -190,7 +192,7 @@
                                 </div>
                             </div>
                             <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                                <button type="button"
+                                <button type="submit"
                                     class="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Отправить</button>
                             </div>
                         </form>

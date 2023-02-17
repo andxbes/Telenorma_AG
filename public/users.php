@@ -3,17 +3,23 @@
 // INSERT INTO `users` (`ID`, `first_name`, `last_name`, `position_id`) VALUES (NULL, 'Lindsay', 'Walton', 1);
 // INSERT INTO `users` (`ID`, `first_name`, `last_name`, `position_id`) VALUES (NULL, 'Courtney', 'Henry', 2);
 // INSERT INTO `users` (`ID`, `first_name`, `last_name`, `position_id`) VALUES (NULL, 'Tom', 'Cook', 3); 
+
 header('Content-Type: application/json; charset=utf-8');
+$users = new Users();
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'DELETE':
         break;
-    case 'PUT':
-        break;
     case 'POST':
+        if (!empty($user_id = filter_input(INPUT_POST, 'user_id', FILTER_SANITIZE_NUMBER_INT))) {
+            $users->update_user($user_id);
+        } else {
+            $users->add_user();
+        }
+        break;
+    case 'OPTIONS':
         break;
     case 'GET':
     default:
-        $users = new Users();
         print json_encode($users->get_users());
 }
 
@@ -40,18 +46,42 @@ class Users
         LIMIT 1000;
         ')->fetchAll(PDO::FETCH_CLASS, 'User');
     }
-    public function get_user($id)
-    {
 
-    }
-
-    public function update_user()
+    public function update_user($user_id)
     {
+        $first_name = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $last_name = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $position = filter_input(INPUT_POST, 'position', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+        // UPDATE `users` SET `first_name` = 'addыы', `last_name` = 'asdasыы', `position_id` = (SELECT id FROM positions where positions.position = 'Менеджер' LIMIT 1) WHERE `users`.`id` = 12; 
+
+        $sql = "UPDATE `users` SET first_name = :first_name, last_name = :last_name, position_id = (SELECT id FROM positions where positions.position = :position LIMIT 1) WHERE `users`.`id` = :user_id;";
+        // $sql = "INSERT INTO `users` (`ID`, `first_name`, `last_name`, `position_id`) VALUES (NULL, :first_name, :last_name, (SELECT id FROM positions where positions.position = :position LIMIT 1));";
+
+        $this->db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY])->execute([
+            ':user_id' => $user_id,
+            ':first_name' => $first_name,
+            ':last_name' => $last_name,
+            ':position' => $position
+        ]);
 
     }
 
     public function add_user()
     {
+        $first_name = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $last_name = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $position = filter_input(INPUT_POST, 'position', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+
+        $sql = "INSERT INTO `users` (`ID`, `first_name`, `last_name`, `position_id`) VALUES (NULL, :first_name, :last_name, (SELECT id FROM positions where positions.position = :position LIMIT 1));";
+        $sth = $this->db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+        $sth->execute([
+            ':first_name' => $first_name,
+            ':last_name' => $last_name,
+            ':position' => $position
+        ]);
+
 
     }
 

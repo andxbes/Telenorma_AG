@@ -1,17 +1,23 @@
 function user_form(el) {
     return {
         element: el,
-        method: "",
         user_id: 0,
         first_name: "",
         last_name: "",
         position: "",
         init() {
-            this.element.addEventListener("submit", function (e) {
-                e.preventDefault();
-                var data = new FormData(form);
-                console.info(data);
-            });
+            let that = this;
+            // this.element.addEventListener("submit", function (e) {
+            //     e.preventDefault();
+            //     var data = new FormData(el);
+            //     fetch('/users.php', {
+            //         method: that.method,
+            //         cache: 'no-cache',
+            //         headers: {
+            //         },
+            //         body: data
+            //     }).then(() => { console.info('sended') });
+            // });
         },
         set_user_data(user, method) {
             if (user) {
@@ -26,10 +32,20 @@ function user_form(el) {
                 this.last_name = '';
                 this.position = '';
             }
-            this.method = method;
 
             console.info("setuserdata", user, method);
         },
+        send_data(el) {
+            var data = new FormData(el);
+            console.info('send data', data);
+            return fetch('/users.php', {
+                method: 'POST',
+                cache: 'no-cache',
+                headers: {
+                },
+                body: data
+            });
+        }
     };
 }
 
