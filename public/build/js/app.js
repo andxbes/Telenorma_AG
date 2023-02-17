@@ -3195,6 +3195,11 @@ function users_table(el) {
     },
     delete_user: function delete_user(user_id) {
       console.info('delete user 1', user_id);
+      return fetch('/users.php?user_id=' + user_id, {
+        method: 'DELETE',
+        cache: 'no-cache',
+        headers: {}
+      });
     }
   };
 }

@@ -7,7 +7,8 @@
 header('Content-Type: application/json; charset=utf-8');
 $users = new Users();
 switch ($_SERVER['REQUEST_METHOD']) {
-    case 'DELETE': // Этот метод пыха тоже не поддерживает
+    case 'DELETE':
+        $users->delete_user(filter_input(INPUT_GET, 'user_id', FILTER_SANITIZE_NUMBER_INT));
         break;
     // case 'PUT': // Как оказалось пыха не поддерживает данный метод, тут в большей степени можно обработать но дописывать самому обработку данных 
     //     break; 
@@ -89,7 +90,11 @@ class Users
 
     public function delete_user($id)
     {
-
+        // DELETE FROM users WHERE `users`.`id` = 14"
+        error_log(print_r($id, true));
+        $sql = "DELETE FROM users WHERE `users`.`id` = ? ;";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
     }
 
     public function __destruct()

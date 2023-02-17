@@ -73,7 +73,8 @@
                                                                 class="text-blue-600 hover:text-blue-900">Редактировать<span
                                                                     class="sr-only">, Lindsay Walton</span></button>
 
-                                                            <button type="button" @click="delete_user(user.id)"
+                                                            <button type="button"
+                                                                @click="delete_user(user.id).then(()=>{refresh_users_data()})"
                                                                 class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                                                                 <span class="sr-only">remove</span>
                                                                 <!-- Heroicon name: outline/x-mark -->
