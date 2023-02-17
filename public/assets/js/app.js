@@ -6,6 +6,7 @@ Alpine.plugin(intersect); //lazy-loading, infinity loading
 
 /** alpine-components **/
 import users_table from "./components/users_table";
+import user_form from "./components/user_form";
 
 
 if (typeof window !== 'undefined') {
@@ -19,6 +20,7 @@ if (typeof window !== 'undefined') {
     document.addEventListener('alpine:init', () => {
         window.Alpine = Alpine;
         window.users_table = users_table;
-
+        window.user_form = user_form;
     });
+
 }

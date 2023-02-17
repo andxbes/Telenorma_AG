@@ -3061,6 +3061,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 /* harmony import */ var _alpinejs_intersect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @alpinejs/intersect */ "./node_modules/@alpinejs/intersect/dist/module.esm.js");
 /* harmony import */ var _components_users_table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/users_table */ "./assets/js/components/users_table.js");
+/* harmony import */ var _components_user_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/user_form */ "./assets/js/components/user_form.js");
 // you can import modules from the theme lib or even from
 // NPM packages if they support it…
 
@@ -3068,6 +3069,7 @@ __webpack_require__.r(__webpack_exports__);
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].plugin(_alpinejs_intersect__WEBPACK_IMPORTED_MODULE_1__["default"]); //lazy-loading, infinity loading
 
 /** alpine-components **/
+
 
 if (typeof window !== 'undefined') {
   window.addEventListener('DOMContentLoaded', function () {
@@ -3079,8 +3081,55 @@ if (typeof window !== 'undefined') {
   document.addEventListener('alpine:init', function () {
     window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
     window.users_table = _components_users_table__WEBPACK_IMPORTED_MODULE_2__["default"];
+    window.user_form = _components_user_form__WEBPACK_IMPORTED_MODULE_3__["default"];
   });
 }
+
+/***/ }),
+
+/***/ "./assets/js/components/user_form.js":
+/*!*******************************************!*\
+  !*** ./assets/js/components/user_form.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function user_form(el) {
+  return {
+    element: el,
+    method: "",
+    user_id: 0,
+    first_name: "",
+    last_name: "",
+    position: "",
+    init: function init() {
+      this.element.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var data = new FormData(form);
+        console.info(data);
+      });
+    },
+    set_user_data: function set_user_data(user, method) {
+      if (user) {
+        this.user_id = user.id;
+        this.first_name = user.first_name;
+        this.last_name = user.last_name;
+        this.position = user.position;
+      } else {
+        this.user_id = 0;
+        this.first_name = '';
+        this.last_name = '';
+        this.position = '';
+      }
+      this.method = method;
+      console.info("setuserdata", user, method);
+    }
+  };
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (user_form);
 
 /***/ }),
 
@@ -3098,6 +3147,11 @@ function users_table(el) {
   return {
     element: el,
     users: null,
+    form_params: {
+      show: false,
+      method: '',
+      user: null
+    },
     init: function init() {
       this.refresh_users_data();
     },
@@ -3106,15 +3160,32 @@ function users_table(el) {
       fetch('/users.php').then(function (res) {
         return res.json();
       }).then(function (data) {
-        console.info(data);
+        //console.info(data);
         // if ((typeof data) !== "undefined") {
         _this.users = data;
         // }
       });
+    },
+    add_new_user: function add_new_user() {
+      this.form_params.method = "POST";
+      this.form_params.user = null;
+      this.form_params.show = true;
+      console.info('add_new_user');
+    },
+    edit_user: function edit_user(user_id) {
+      console.info('edit user', user_id);
+      this.form_params.method = "PUT";
+      this.form_params.user = this.users.find(function (user) {
+        return user.id === user_id;
+      });
+      this.form_params.show = true;
+      // this.form_params.user = $id;
+    },
+    delete_user: function delete_user(user_id) {
+      console.info('delete user', user_id);
     }
   };
 }
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (users_table);
 
 /***/ }),
