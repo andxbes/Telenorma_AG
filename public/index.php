@@ -152,7 +152,7 @@
                                         for="grid-first-name">
                                         Имя
                                     </label>
-                                    <input
+                                    <input required
                                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                         name="first_name" x-model="first_name" type="text" placeholder="Jane">
                                     <!-- <p class="text-red-500 text-xs italic">Please fill out this field.</p> -->
@@ -162,7 +162,7 @@
                                         for="grid-last-name">
                                         Фамилия
                                     </label>
-                                    <input
+                                    <input required
                                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                         type="text" placeholder="Doe" name="last_name" x-model="last_name">
                                 </div>
@@ -174,7 +174,7 @@
                                         Должность
                                     </label>
                                     <div class="relative">
-                                        <select name="position" x-model="position"
+                                        <select required name="position" x-model="position"
                                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 bg-none py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                                             <option value="">Сделайте выбор</option>
                                             <option value="Программист">Программист</option>

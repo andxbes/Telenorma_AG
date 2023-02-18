@@ -1,9 +1,5 @@
 <?php
 
-// INSERT INTO `users` (`ID`, `first_name`, `last_name`, `position_id`) VALUES (NULL, 'Lindsay', 'Walton', 1);
-// INSERT INTO `users` (`ID`, `first_name`, `last_name`, `position_id`) VALUES (NULL, 'Courtney', 'Henry', 2);
-// INSERT INTO `users` (`ID`, `first_name`, `last_name`, `position_id`) VALUES (NULL, 'Tom', 'Cook', 3); 
-
 header('Content-Type: application/json; charset=utf-8');
 $users = new Users();
 switch ($_SERVER['REQUEST_METHOD']) {
@@ -28,7 +24,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 class Users
 {
-    // private $users;
     private $db;
 
     public function __construct()
