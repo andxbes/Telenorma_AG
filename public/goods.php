@@ -6,7 +6,7 @@ class Good
     public $meta = null;
     public function __toString()
     {
-        return $this->name . (!empty($this->meta) ? ', ' . $this->meta : '');
+        return $this->name . (!empty($this->meta) ? ',' . $this->meta : '');
     }
 }
 
@@ -39,7 +39,7 @@ group by goods.id;
 $query = $db->query("
 SELECT goods.name,
 	GROUP_CONCAT(
-		 CONCAT(product_meta.meta_key,', ',product_meta.meta_value)
+		 CONCAT(product_meta.meta_key,',',product_meta.meta_value)
     ) AS meta
 FROM goods
 LEFT JOIN ( SELECT additional_goods_field_values.good_id AS good_id, additional_fields.name AS meta_key, additional_field_values.name AS meta_value
