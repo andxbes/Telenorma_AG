@@ -24,7 +24,7 @@ services:
   phpmyadmin:
     image: bitnami/phpmyadmin:latest
     container_name: phpMyAdmin
-    restart: always
+    restart: unless-stopped
     networks:
       - telenorma_ag
     environment:
@@ -40,6 +40,7 @@ services:
 
   phpfpm:
     image: 'bitnami/php-fpm:latest'
+    restart: unless-stopped
     networks:
       - telenorma_ag
     volumes:
@@ -47,6 +48,7 @@ services:
 
   nginx:
     image: 'bitnami/nginx:latest'
+    restart: unless-stopped
     depends_on:
       - phpfpm
     networks:
