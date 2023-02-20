@@ -45,6 +45,8 @@ services:
       - telenorma_ag
     volumes:
       - ./public:/app
+      - ./php/custom.ini:/opt/bitnami/php/etc/conf.d/custom.ini
+      - ./php-fpm.d/www.conf:/opt/bitnami/php/etc/php-fpm.d/www.conf
 
   nginx:
     image: 'bitnami/nginx:latest'
