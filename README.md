@@ -7,4 +7,4 @@
 6) you can watch part 2 here http://localhost/goods.php 
    
 
-https://youtu.be/u6RkC20sAN4
+[![Watch the video](https://i.ytimg.com/vi/u6RkC20sAN4/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYACzgWKAgwIABABGEMgWihlMA8=&rs=AOn4CLCEnKISROHv6I_QAHPGs36H1dPpVw)]( https://youtu.be/u6RkC20sAN4)
